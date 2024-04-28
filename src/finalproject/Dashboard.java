@@ -20,13 +20,18 @@ public class Dashboard extends javax.swing.JFrame {
     /**
      * Creates new form Dashboard
      */
+    private Clip musicClip;
+    
     public Dashboard() {
         initComponents();
         
     }
     
+    String filepath = "C:\\Users\\Suenlie\\Downloads\\axiemusic.wav";
+    
     public Dashboard(String name){
         initComponents();
+        musicClip = PlayMusic(filepath);
         txtDisplayName.setText(name);
         btnAdventure.setBackground(new java.awt.Color(0,0,0,0));
         btnArena.setBackground(new java.awt.Color(0,0,0,0));
@@ -35,6 +40,8 @@ public class Dashboard extends javax.swing.JFrame {
         
         
     }
+    
+    int musicStop = 0;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -64,6 +71,11 @@ public class Dashboard extends javax.swing.JFrame {
         getContentPane().add(txtDisplayName, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 260, 120));
 
         btnAdventure.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAdventure.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdventureActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnAdventure, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 50, 200, 90));
 
         btnArena.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -96,8 +108,8 @@ public class Dashboard extends javax.swing.JFrame {
         lblBeast.setIcon(new javax.swing.ImageIcon(getClass().getResource("/finalproject/images/beast (1).png"))); // NOI18N
         getContentPane().add(lblBeast, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 290, 190, 110));
 
-        lblBird.setIcon(new javax.swing.ImageIcon(getClass().getResource("/finalproject/images/bird (1).png"))); // NOI18N
-        getContentPane().add(lblBird, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 320, 190, 110));
+        lblBird.setIcon(new javax.swing.ImageIcon(getClass().getResource("/finalproject/images/reptile-ezgif.com-resize.gif"))); // NOI18N
+        getContentPane().add(lblBird, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 330, 130, 100));
 
         dashboardBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/finalproject/images/dashboardbg.png"))); // NOI18N
         getContentPane().add(dashboardBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -107,19 +119,34 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void btnArenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnArenaActionPerformed
         // TODO add your handling code here:
+        String btnsound = "C:\\Users\\Suenlie\\Downloads\\Menu Game Button Click Sound Effect.wav";
+        PlayMusic(btnsound);
         JOptionPane.showMessageDialog(null, "Available Soon!", "Soon!", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btnArenaActionPerformed
 
     private void btnTournamentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTournamentActionPerformed
         // TODO add your handling code here:
+        String btnsound = "C:\\Users\\Suenlie\\Downloads\\Menu Game Button Click Sound Effect.wav";
+        PlayMusic(btnsound);
            JOptionPane.showMessageDialog(null, "Available Soon!", "Soon!", JOptionPane.INFORMATION_MESSAGE);
 
     }//GEN-LAST:event_btnTournamentActionPerformed
 
     private void btnLeaderboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLeaderboardActionPerformed
         // TODO add your handling code here:
+        String btnsound = "C:\\Users\\Suenlie\\Downloads\\Menu Game Button Click Sound Effect.wav";
+        PlayMusic(btnsound);
         JOptionPane.showMessageDialog(null, "Available Soon!", "Soon!", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btnLeaderboardActionPerformed
+
+    private void btnAdventureActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdventureActionPerformed
+        // TODO add your handling code here:
+        if (musicClip != null && musicClip.isRunning()) {
+            musicClip.stop(); // Pause the music
+        }
+        new VS().setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnAdventureActionPerformed
 
     /**
      * @param args the command line arguments
@@ -148,8 +175,7 @@ public class Dashboard extends javax.swing.JFrame {
         }
         //</editor-fold>
         
-        String filepath = "C:\\Users\\Suenlie\\Downloads\\axiemusic.wav";
-        PlayMusic(filepath);
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -158,7 +184,7 @@ public class Dashboard extends javax.swing.JFrame {
         });
     }
     
-    public static void PlayMusic(String location) {
+    public static Clip PlayMusic(String location) {
         try {
             File musicPath = new File(location);
             if (musicPath.exists()) {
@@ -166,15 +192,17 @@ public class Dashboard extends javax.swing.JFrame {
                 Clip clip = AudioSystem.getClip();
                 clip.open(audioInput);
                 clip.start();
+                return clip; // Return the Clip object
             } else {
                 System.out.println("Can't find file");
             }
-
         } catch (Exception e) {
             System.out.println(e);
         }
-    }
-
+        return null;
+    }   
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdventure;
     private javax.swing.JButton btnArena;

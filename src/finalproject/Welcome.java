@@ -86,8 +86,6 @@ public class Welcome extends javax.swing.JFrame {
         }else{
             new Dashboard(name).setVisible(true);
             this.setVisible(false);
-            String filepath = "C:\\Users\\Suenlie\\Downloads\\axiemusic.wav";
-            PlayMusic(filepath);
         }
     }//GEN-LAST:event_submitNameActionPerformed
 
@@ -124,23 +122,6 @@ public class Welcome extends javax.swing.JFrame {
                 new Welcome().setVisible(true);
             }
         });
-    }
-    
-    public static void PlayMusic(String location) {
-        try {
-            File musicPath = new File(location);
-            if (musicPath.exists()) {
-                AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
-                Clip clip = AudioSystem.getClip();
-                clip.open(audioInput);
-                clip.start();
-            } else {
-                System.out.println("Can't find file");
-            }
-
-        } catch (Exception e) {
-            System.out.println(e);
-        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
