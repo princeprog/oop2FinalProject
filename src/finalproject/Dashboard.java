@@ -57,9 +57,9 @@ public class Dashboard extends javax.swing.JFrame {
         btnArena = new javax.swing.JButton();
         btnTournament = new javax.swing.JButton();
         btnLeaderboard = new javax.swing.JButton();
-        lblPlant = new javax.swing.JLabel();
-        lblBeast = new javax.swing.JLabel();
-        lblBird = new javax.swing.JLabel();
+        lblreptile = new javax.swing.JLabel();
+        lblbeast = new javax.swing.JLabel();
+        lblaqua = new javax.swing.JLabel();
         dashboardBackground = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -102,16 +102,17 @@ public class Dashboard extends javax.swing.JFrame {
         });
         getContentPane().add(btnLeaderboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 420, 200, 90));
 
-        lblPlant.setIcon(new javax.swing.ImageIcon(getClass().getResource("/finalproject/images/plant (1).png"))); // NOI18N
-        getContentPane().add(lblPlant, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 320, 190, 110));
+        lblreptile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/finalproject/images/reptile-ezgif.com-resize.gif"))); // NOI18N
+        lblreptile.setText("jLabel1");
+        getContentPane().add(lblreptile, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 320, 140, 100));
 
-        lblBeast.setIcon(new javax.swing.ImageIcon(getClass().getResource("/finalproject/images/beast (1).png"))); // NOI18N
-        getContentPane().add(lblBeast, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 290, 190, 110));
+        lblbeast.setIcon(new javax.swing.ImageIcon(getClass().getResource("/finalproject/images/beastfinal (1).gif"))); // NOI18N
+        getContentPane().add(lblbeast, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 240, 170, 140));
 
-        lblBird.setIcon(new javax.swing.ImageIcon(getClass().getResource("/finalproject/images/reptile-ezgif.com-resize.gif"))); // NOI18N
-        getContentPane().add(lblBird, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 330, 130, 100));
+        lblaqua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/finalproject/images/aquafinels.gif"))); // NOI18N
+        getContentPane().add(lblaqua, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 290, 170, 130));
 
-        dashboardBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/finalproject/images/dashboardbg.png"))); // NOI18N
+        dashboardBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/finalproject/images/backgrounds/dashboardbg.png"))); // NOI18N
         getContentPane().add(dashboardBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
@@ -209,9 +210,9 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JButton btnLeaderboard;
     private javax.swing.JButton btnTournament;
     private javax.swing.JLabel dashboardBackground;
-    private javax.swing.JLabel lblBeast;
-    private javax.swing.JLabel lblBird;
-    private javax.swing.JLabel lblPlant;
+    private javax.swing.JLabel lblaqua;
+    private javax.swing.JLabel lblbeast;
+    private javax.swing.JLabel lblreptile;
     public javax.swing.JLabel txtDisplayName;
     // End of variables declaration//GEN-END:variables
 }
