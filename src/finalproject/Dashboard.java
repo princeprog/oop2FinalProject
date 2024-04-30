@@ -22,6 +22,8 @@ public class Dashboard extends javax.swing.JFrame {
      */
     private Clip musicClip;
     
+    int slp = 0;
+    String name;
     public Dashboard() {
         initComponents();
         
@@ -29,8 +31,10 @@ public class Dashboard extends javax.swing.JFrame {
     
     String filepath = "C:\\Users\\Suenlie\\Downloads\\axiemusic.wav";
     
-    public Dashboard(String name){
+    public Dashboard(String name, int slp){
         initComponents();
+        this.name = name;
+        this.slp = slp;
         musicClip = PlayMusic(filepath);
         txtDisplayName.setText(name);
         btnAdventure.setBackground(new java.awt.Color(0,0,0,0));
@@ -145,7 +149,7 @@ public class Dashboard extends javax.swing.JFrame {
         if (musicClip != null && musicClip.isRunning()) {
             musicClip.stop(); // Pause the music
         }
-        new VS().setVisible(true);
+        new VS(name).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnAdventureActionPerformed
 

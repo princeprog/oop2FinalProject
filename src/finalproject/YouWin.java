@@ -4,36 +4,37 @@
  */
 package finalproject;
 
-import static finalproject.Dashboard.PlayMusic;
 import java.io.File;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import javax.swing.*;
 
 /**
  *
  * @author Suenlie
  */
-public class VS extends javax.swing.JFrame {
+public class YouWin extends javax.swing.JFrame {
 
     /**
-     * Creates new form VS
+     * Creates new form YouWin
      */
     private Clip musicClip;
+    int slpe = 50;
     String name;
+    String filepath = "C:\\Users\\Suenlie\\Downloads\\Queen - We are the champions (Chorus only) (1).wav";
     
-    String filepath = "C:\\Users\\Suenlie\\Downloads\\Taking out a Sword Sound Effect.wav";
-    
-    public VS(){
+    public YouWin(){
         initComponents();
     }
     
-    public VS(String name) {
+    public YouWin(String name) {
         initComponents();
+        returnbtn.setBackground(new java.awt.Color(0,0,0,0));
+        
         this.name = name;
         musicClip = PlayMusic(filepath);
-        btnStart.setBackground(new java.awt.Color(0,0,0,0));
+        
+        
     }
 
     /**
@@ -45,31 +46,47 @@ public class VS extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnStart = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        beast = new javax.swing.JLabel();
+        reptile1 = new javax.swing.JLabel();
+        aqua1 = new javax.swing.JLabel();
+        returnbtn = new javax.swing.JButton();
+        youwinbg = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnStart.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnStart.addActionListener(new java.awt.event.ActionListener() {
+        beast.setIcon(new javax.swing.ImageIcon(getClass().getResource("/finalproject/images/beastfinal (1).gif"))); // NOI18N
+        getContentPane().add(beast, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 210, 170, 110));
+
+        reptile1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/finalproject/images/reptile-ezgif.com-resize.gif"))); // NOI18N
+        getContentPane().add(reptile1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 220, 130, 90));
+
+        aqua1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/finalproject/images/aquafinels.gif"))); // NOI18N
+        getContentPane().add(aqua1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 200, 170, 140));
+
+        returnbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnStartActionPerformed(evt);
+                returnbtnActionPerformed(evt);
             }
         });
-        getContentPane().add(btnStart, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 510, 130, 50));
+        getContentPane().add(returnbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 500));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/finalproject/images/START (1).png"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 600));
+        youwinbg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/finalproject/images/backgrounds/VICTORY (3).gif"))); // NOI18N
+        getContentPane().add(youwinbg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 500));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
+    private void returnbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnbtnActionPerformed
         // TODO add your handling code here:
-        new Adventure(name).setVisible(true);
+        slpe += 50;
+        if (musicClip != null && musicClip.isRunning()) {
+                musicClip.stop(); // Pause the music
+            }
+        Dashboard obj = new Dashboard(name,slpe);
+        obj.setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_btnStartActionPerformed
+    }//GEN-LAST:event_returnbtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -88,20 +105,20 @@ public class VS extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VS.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(YouWin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VS.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(YouWin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VS.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(YouWin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VS.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(YouWin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VS().setVisible(true);
+                new YouWin().setVisible(true);
             }
         });
     }
@@ -113,6 +130,7 @@ public class VS extends javax.swing.JFrame {
                 AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
                 Clip clip = AudioSystem.getClip();
                 clip.open(audioInput);
+                clip.loop(5);
                 clip.start();
                 return clip; // Return the Clip object
             } else {
@@ -122,10 +140,13 @@ public class VS extends javax.swing.JFrame {
             System.out.println(e);
         }
         return null;
-    }   
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnStart;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel aqua1;
+    private javax.swing.JLabel beast;
+    private javax.swing.JLabel reptile1;
+    private javax.swing.JButton returnbtn;
+    private javax.swing.JLabel youwinbg;
     // End of variables declaration//GEN-END:variables
 }

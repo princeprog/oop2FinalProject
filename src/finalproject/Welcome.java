@@ -21,6 +21,7 @@ public class Welcome extends javax.swing.JFrame {
      * Creates new form Welcome
      */
     String name;
+    int slp = 0;
     
     
     
@@ -84,7 +85,7 @@ public class Welcome extends javax.swing.JFrame {
         if(name.isEmpty()){
             JOptionPane.showMessageDialog(null, "Please enter your name", "Invalid Name", JOptionPane.WARNING_MESSAGE);
         }else{
-            new Dashboard(name).setVisible(true);
+            new Dashboard(name,slp).setVisible(true);
             this.setVisible(false);
         }
     }//GEN-LAST:event_submitNameActionPerformed

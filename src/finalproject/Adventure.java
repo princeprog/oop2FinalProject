@@ -4,6 +4,7 @@
  */
 package finalproject;
 
+import static finalproject.Dashboard.PlayMusic;
 import java.awt.Color;
 import java.io.File;
 import javax.sound.sampled.AudioInputStream;
@@ -27,6 +28,7 @@ public class Adventure extends javax.swing.JFrame {
     int countRound=1;
     int energy = 3;
     String filepath = "C:\\Users\\Suenlie\\Downloads\\Axie Infinity - Arena Theme Song.wav";
+    String stopslice = "C:\\Users\\Suenlie\\Documents\\Bgmusics\\slicesound.wav";
     
     Reptile reptile = new Reptile(480);
     Beast beast = new Beast(480);
@@ -37,6 +39,8 @@ public class Adventure extends javax.swing.JFrame {
     int aquahealth = aqua.getHealthPoints();
     int beasthealth = beast.getHealthPoints();
     int enemyHealth1 = enemy1.getHealthPoints();
+    
+    private Clip musicClip;
     
     int a = 0;
     int b = 0;
@@ -63,12 +67,19 @@ public class Adventure extends javax.swing.JFrame {
     int holder11;
     int holder12;
     
+    String name;
     
-    public Adventure() {
+    public Adventure(){
         initComponents();
-        PlayMusic(filepath);
+    }
+    
+    public Adventure(String name) {
+        initComponents();
+        this.name = name;
+        musicClip = PlayMusic(filepath);
         lbldead.setVisible(false);
         randomgeneratecards();
+        aliveChecker();
         roundCounter.setText("Round "+countRound);
         energyCounter.setText(""+energy+"/10");
         lblbeasthp.setText("Beast: "+beasthealth);
@@ -108,6 +119,7 @@ public class Adventure extends javax.swing.JFrame {
         lblbeastcard4.setVisible(false);
         
     }
+    
     
     public void crossout(){
         if(a == 0){
@@ -252,6 +264,7 @@ public class Adventure extends javax.swing.JFrame {
                             counter++;
                         }else{
                             cross1.setVisible(true);
+                            reptilebtn1.setEnabled(false);
                         }
                     }
                     break;
@@ -266,6 +279,7 @@ public class Adventure extends javax.swing.JFrame {
                             counter++;
                         }else{
                             cross2.setVisible(true);
+                            reptilebtn2.setEnabled(false);
                         }
                     }
                     break;
@@ -280,6 +294,7 @@ public class Adventure extends javax.swing.JFrame {
                             counter++;
                         }else{
                             cross3.setVisible(true);
+                            reptilebtn3.setEnabled(false);
                         }
                     }
                     break;
@@ -294,6 +309,7 @@ public class Adventure extends javax.swing.JFrame {
                             counter++;
                         }else{
                             cross4.setVisible(true);
+                            reptilebtn4.setEnabled(false);
                         }
                     }
                     break;
@@ -308,6 +324,7 @@ public class Adventure extends javax.swing.JFrame {
                             counter++;
                         }else{
                             cross5.setVisible(true);
+                            aquabtn1.setEnabled(false);
                         }
                     }
                     break;
@@ -322,6 +339,7 @@ public class Adventure extends javax.swing.JFrame {
                             counter++;
                         }else{
                             cross6.setVisible(true);
+                            aquabtn2.setEnabled(false);
                         }
                     }
                     break;
@@ -336,6 +354,7 @@ public class Adventure extends javax.swing.JFrame {
                             counter++;
                         }else{
                             cross7.setVisible(true);
+                            aquabtn3.setEnabled(false);
                         }
                     }
                     break;
@@ -350,6 +369,7 @@ public class Adventure extends javax.swing.JFrame {
                             counter++;
                         }else{
                             cross8.setVisible(true);
+                            aquabtn4.setEnabled(false);
                         }
                     }
                     break;
@@ -364,6 +384,7 @@ public class Adventure extends javax.swing.JFrame {
                             counter++;
                         }else{
                             cross9.setVisible(true);
+                            beastbtn1.setEnabled(false);
                         }
                     }
                     break;
@@ -378,6 +399,7 @@ public class Adventure extends javax.swing.JFrame {
                             counter++;
                         }else{
                             cross10.setVisible(true);
+                            beastbtn2.setEnabled(false);
                         }
                     }
                     break;
@@ -392,6 +414,7 @@ public class Adventure extends javax.swing.JFrame {
                             counter++;
                         }else{
                             cross11.setVisible(true);
+                            beastbtn3.setEnabled(false);
                         }
                     }
                     break;
@@ -406,6 +429,7 @@ public class Adventure extends javax.swing.JFrame {
                             counter++;
                         }else{
                             cross12.setVisible(true);
+                            beastbtn4.setEnabled(false);
                         }
                     }
                     break;
@@ -419,6 +443,63 @@ public class Adventure extends javax.swing.JFrame {
         }
         
     }
+    
+    public void beastghost(){
+           lblbeast.setVisible(false);
+            beastdead.setVisible(true);
+            beastbtn1.setEnabled(false);
+            cross9.setVisible(true);
+            beastbtn2.setEnabled(false);
+            cross10.setVisible(true);
+            beastbtn3.setEnabled(false);
+            cross11.setVisible(true);
+            beastbtn4.setEnabled(false);
+            cross12.setVisible(true);
+    }
+    
+    public void aquaghost(){
+            lblaqua.setVisible(false);
+            aquadead.setVisible(true);
+            aquabtn1.setEnabled(false);
+            cross5.setVisible(true);
+            aquabtn2.setEnabled(false);
+            cross6.setVisible(true);
+            aquabtn3.setEnabled(false);
+            cross7.setVisible(true);
+            aquabtn4.setEnabled(false);
+            cross8.setVisible(true);
+    }
+    
+    public void reptileghost(){
+            lblreptile.setVisible(false);
+            reptiledead.setVisible(true);
+            reptilebtn1.setEnabled(false);
+            cross1.setVisible(true);
+            reptilebtn2.setEnabled(false);
+            cross2.setVisible(true);
+            reptilebtn3.setEnabled(false);
+            cross3.setVisible(true);
+            reptilebtn4.setEnabled(false);
+            cross4.setVisible(true);
+    }
+    
+    public void aliveChecker(){
+        beastdead.setVisible(false);
+        aquadead.setVisible(false);
+        reptiledead.setVisible(false);
+        if(!beast.isAlive() && aqua.isAlive() && reptile.isAlive()){
+            beastghost();
+        }
+        else if(!aqua.isAlive() && !beast.isAlive() && reptile.isAlive()){
+            aquaghost();
+            beastghost();
+        }
+        else if(!reptile.isAlive() && !aqua.isAlive() && !beast.isAlive()){
+            reptileghost();
+            aquaghost();
+            beastghost();
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -429,6 +510,9 @@ public class Adventure extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        reptiledead = new javax.swing.JLabel();
+        aquadead = new javax.swing.JLabel();
+        beastdead = new javax.swing.JLabel();
         lbldead = new javax.swing.JLabel();
         roundCounter = new javax.swing.JLabel();
         energyCounter = new javax.swing.JLabel();
@@ -485,6 +569,15 @@ public class Adventure extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        reptiledead.setIcon(new javax.swing.ImageIcon(getClass().getResource("/finalproject/images/kimi-yip-ghost-sx-ezgif.com-reverse (1).gif"))); // NOI18N
+        getContentPane().add(reptiledead, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, 180, 180));
+
+        aquadead.setIcon(new javax.swing.ImageIcon(getClass().getResource("/finalproject/images/kimi-yip-ghost-sx-ezgif.com-reverse (1).gif"))); // NOI18N
+        getContentPane().add(aquadead, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 190, 180, 180));
+
+        beastdead.setIcon(new javax.swing.ImageIcon(getClass().getResource("/finalproject/images/kimi-yip-ghost-sx-ezgif.com-reverse (1).gif"))); // NOI18N
+        getContentPane().add(beastdead, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 110, 180, 180));
 
         lbldead.setIcon(new javax.swing.ImageIcon(getClass().getResource("/finalproject/images/kimi-yip-ghost-sx-ezgif.com-reverse.gif"))); // NOI18N
         getContentPane().add(lbldead, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 130, 190, 170));
@@ -1133,6 +1226,8 @@ public class Adventure extends javax.swing.JFrame {
         lblbeastcard3.setVisible(false);
         lblbeastcard4.setVisible(false);
         
+        
+        
         attack(a,b,c,d,e,f,g,h,j,k,l,m);
         enemyAttack();
         removecrossout();
@@ -1142,7 +1237,17 @@ public class Adventure extends javax.swing.JFrame {
         if(!enemy1.isAlive()){
             lblenemy1.setVisible(false);
             lbldead.setVisible(true);
+            
+            new YouWin(name).setVisible(true);
+            this.setVisible(false);
+            if (musicClip != null && musicClip.isRunning()) {
+                musicClip.stop(); // Pause the music
+            }
         }
+        aliveChecker();
+        
+        PlayMusicOnce(stopslice);
+       
     }//GEN-LAST:event_btnEndturnActionPerformed
 
     /**
@@ -1199,6 +1304,24 @@ public class Adventure extends javax.swing.JFrame {
         return null;
     }
     
+    public static Clip PlayMusicOnce(String location) {
+        try {
+            File musicPath = new File(location);
+            if (musicPath.exists()) {
+                AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
+                Clip clip = AudioSystem.getClip();
+                clip.open(audioInput);
+                clip.start();
+                return clip; // Return the Clip object
+            } else {
+                System.out.println("Can't find file");
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+    
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1207,11 +1330,13 @@ public class Adventure extends javax.swing.JFrame {
     private javax.swing.JButton aquabtn2;
     private javax.swing.JButton aquabtn3;
     private javax.swing.JButton aquabtn4;
+    private javax.swing.JLabel aquadead;
     private javax.swing.JProgressBar beastHealthBar;
     private javax.swing.JButton beastbtn1;
     private javax.swing.JButton beastbtn2;
     private javax.swing.JButton beastbtn3;
     private javax.swing.JButton beastbtn4;
+    private javax.swing.JLabel beastdead;
     private javax.swing.JButton btnEndturn;
     private javax.swing.JLabel cross1;
     private javax.swing.JLabel cross10;
@@ -1254,6 +1379,7 @@ public class Adventure extends javax.swing.JFrame {
     private javax.swing.JButton reptilebtn2;
     private javax.swing.JButton reptilebtn3;
     private javax.swing.JButton reptilebtn4;
+    private javax.swing.JLabel reptiledead;
     private javax.swing.JLabel roundCounter;
     // End of variables declaration//GEN-END:variables
 }
