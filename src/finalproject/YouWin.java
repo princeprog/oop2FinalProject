@@ -19,7 +19,7 @@ public class YouWin extends javax.swing.JFrame {
      * Creates new form YouWin
      */
     private Clip musicClip;
-    int slpe = 50;
+    int slpe = 0;
     String name;
     String filepath = "C:\\Users\\Suenlie\\Downloads\\Queen - We are the champions (Chorus only) (1).wav";
     

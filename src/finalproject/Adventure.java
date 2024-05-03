@@ -33,7 +33,7 @@ public class Adventure extends javax.swing.JFrame {
     Reptile reptile = new Reptile(480);
     Beast beast = new Beast(480);
     Aqua aqua = new Aqua(480);
-    Enemy enemy1 = new Enemy(580);
+    Enemy enemy1 = new Enemy(1080);
     
     int reptilehealth = reptile.getHealthPoints();
     int aquahealth = aqua.getHealthPoints();
@@ -72,10 +72,11 @@ public class Adventure extends javax.swing.JFrame {
     public Adventure(){
         initComponents();
     }
-    
-    public Adventure(String name) {
+    int slp =0;
+    public Adventure(String name, int slp) {
         initComponents();
         this.name = name;
+        this.slp = slp;
         musicClip = PlayMusic(filepath);
         lbldead.setVisible(false);
         randomgeneratecards();
@@ -250,18 +251,18 @@ public class Adventure extends javax.swing.JFrame {
     public void randomgeneratecards(){
         Random rand = new Random();
         int i = 1;
-        int counter = 0;
-        while(i <= 15){
+        while(i <= 12){
             switch(i){
                 case 1:
                     holder1 = rand.nextInt(2);
                     if(holder1 == 1){
                         cross1.setVisible(false);
-                        counter++;
+                        
                     }else{
                         holder1 = rand.nextInt(2);
                         if(holder1 == 1){
-                            counter++;
+                            cross1.setVisible(false);
+                            
                         }else{
                             cross1.setVisible(true);
                             reptilebtn1.setEnabled(false);
@@ -272,11 +273,12 @@ public class Adventure extends javax.swing.JFrame {
                     holder2 = rand.nextInt(2);
                     if(holder2 == 1){
                         cross2.setVisible(false);
-                        counter++;
+                        
                     }else{
                         holder2 = rand.nextInt(2);
                         if(holder2 == 1){
-                            counter++;
+                            cross2.setVisible(false);
+                            
                         }else{
                             cross2.setVisible(true);
                             reptilebtn2.setEnabled(false);
@@ -287,11 +289,12 @@ public class Adventure extends javax.swing.JFrame {
                     holder3 = rand.nextInt(2);
                     if(holder3 == 1){
                         cross3.setVisible(false);
-                        counter++;
+                        
                     }else{
                         holder3 = rand.nextInt(2);
                         if(holder3 == 1){
-                            counter++;
+                            cross3.setVisible(false);
+                            
                         }else{
                             cross3.setVisible(true);
                             reptilebtn3.setEnabled(false);
@@ -302,11 +305,12 @@ public class Adventure extends javax.swing.JFrame {
                     holder4 = rand.nextInt(2);
                     if(holder4 == 1){
                         cross4.setVisible(false);
-                        counter++;
+                        
                     }else{
                         holder4 = rand.nextInt(2);
                         if(holder4 == 1){
-                            counter++;
+                            cross4.setVisible(false);
+                            
                         }else{
                             cross4.setVisible(true);
                             reptilebtn4.setEnabled(false);
@@ -317,11 +321,12 @@ public class Adventure extends javax.swing.JFrame {
                     holder5 = rand.nextInt(2);
                     if(holder5 == 1){
                         cross5.setVisible(false);
-                        counter++;
+                        
                     }else{
                         holder5 = rand.nextInt(2);
                         if(holder5 == 1){
-                            counter++;
+                            cross5.setVisible(false);
+                            
                         }else{
                             cross5.setVisible(true);
                             aquabtn1.setEnabled(false);
@@ -332,11 +337,12 @@ public class Adventure extends javax.swing.JFrame {
                     holder6 = rand.nextInt(2);
                     if(holder6 == 1){
                         cross6.setVisible(false);
-                        counter++;
+                        
                     }else{
                         holder6 = rand.nextInt(2);
                         if(holder6 == 1){
-                            counter++;
+                            cross6.setVisible(false);
+                            
                         }else{
                             cross6.setVisible(true);
                             aquabtn2.setEnabled(false);
@@ -347,11 +353,12 @@ public class Adventure extends javax.swing.JFrame {
                     holder7 = rand.nextInt(2);
                     if(holder7 == 1){
                         cross7.setVisible(false);
-                        counter++;
+                        
                     }else{
                         holder7 = rand.nextInt(2);
                         if(holder7 == 1){
-                            counter++;
+                            cross7.setVisible(false);
+                            
                         }else{
                             cross7.setVisible(true);
                             aquabtn3.setEnabled(false);
@@ -362,11 +369,12 @@ public class Adventure extends javax.swing.JFrame {
                     holder8 = rand.nextInt(2);
                     if(holder8 == 1){
                         cross8.setVisible(false);
-                        counter++;
+                        
                     }else{
                         holder8 = rand.nextInt(2);
                         if(holder8 == 1){
-                            counter++;
+                            cross8.setVisible(false);
+                            
                         }else{
                             cross8.setVisible(true);
                             aquabtn4.setEnabled(false);
@@ -377,11 +385,12 @@ public class Adventure extends javax.swing.JFrame {
                     holder9 = rand.nextInt(2);
                     if(holder9 == 1){
                         cross9.setVisible(false);
-                        counter++;
+                        
                     }else{
                         holder9 = rand.nextInt(2);
                         if(holder9 == 1){
-                            counter++;
+                            cross9.setVisible(false);
+                            
                         }else{
                             cross9.setVisible(true);
                             beastbtn1.setEnabled(false);
@@ -392,11 +401,12 @@ public class Adventure extends javax.swing.JFrame {
                     holder10 = rand.nextInt(2);
                     if(holder10 == 1){
                         cross10.setVisible(false);
-                        counter++;
+                        
                     }else{
                         holder10 = rand.nextInt(2);
                         if(holder10 == 1){
-                            counter++;
+                            cross10.setVisible(false);
+                            
                         }else{
                             cross10.setVisible(true);
                             beastbtn2.setEnabled(false);
@@ -407,11 +417,12 @@ public class Adventure extends javax.swing.JFrame {
                     holder11 = rand.nextInt(2);
                     if(holder11 == 1){
                         cross11.setVisible(false);
-                        counter++;
+                        
                     }else{
                         holder11 = rand.nextInt(2);
                         if(holder11 == 1){
-                            counter++;
+                            cross11.setVisible(false);
+                            
                         }else{
                             cross11.setVisible(true);
                             beastbtn3.setEnabled(false);
@@ -422,11 +433,12 @@ public class Adventure extends javax.swing.JFrame {
                     holder12 = rand.nextInt(2);
                     if(holder12 == 1){
                         cross12.setVisible(false);
-                        counter++;
+                        
                     }else{
                         holder12 = rand.nextInt(2);
                         if(holder12 == 1){
-                            counter++;
+                            cross12.setVisible(false);
+                            
                         }else{
                             cross12.setVisible(true);
                             beastbtn4.setEnabled(false);
@@ -436,9 +448,7 @@ public class Adventure extends javax.swing.JFrame {
                 default:
                     break;
             }
-            if(counter == 8){
-                break;
-            }
+            
             i++;
         }
         
@@ -495,11 +505,17 @@ public class Adventure extends javax.swing.JFrame {
             beastghost();
         }
         else if(!reptile.isAlive() && !aqua.isAlive() && !beast.isAlive()){
+            if (musicClip != null && musicClip.isRunning()) {
+                musicClip.stop(); // Pause the music
+            }
             reptileghost();
             aquaghost();
             beastghost();
+            new DEFEATED(name,slp).setVisible(true);
+            this.setVisible(false);
         }
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -824,6 +840,7 @@ public class Adventure extends javax.swing.JFrame {
 
     private void reptilebtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reptilebtn1ActionPerformed
         // TODO add your handling code here:
+        drawcardsound();
         if(energy == 0){
             crossout();
         }else{
@@ -840,6 +857,7 @@ public class Adventure extends javax.swing.JFrame {
 
     private void reptilebtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reptilebtn2ActionPerformed
         // TODO add your handling code here:
+        drawcardsound();
         if(energy == 0){
             crossout();
         }else{
@@ -856,6 +874,7 @@ public class Adventure extends javax.swing.JFrame {
 
     private void reptilebtn3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reptilebtn3ActionPerformed
         // TODO add your handling code here:
+        drawcardsound();
         if(energy <= 0){
             crossout();
         }else{
@@ -872,6 +891,7 @@ public class Adventure extends javax.swing.JFrame {
 
     private void reptilebtn4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reptilebtn4ActionPerformed
         // TODO add your handling code here:
+        drawcardsound();
         if(energy <= 0){
             crossout();
         }else{
@@ -888,6 +908,7 @@ public class Adventure extends javax.swing.JFrame {
 
     private void aquabtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aquabtn1ActionPerformed
         // TODO add your handling code here:
+        drawcardsound();
         if(energy <= 0){
             crossout();
         }else{
@@ -904,6 +925,7 @@ public class Adventure extends javax.swing.JFrame {
 
     private void aquabtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aquabtn2ActionPerformed
         // TODO add your handling code here:
+        drawcardsound();
         if(energy <= 0){
             crossout();
         }else{
@@ -920,6 +942,7 @@ public class Adventure extends javax.swing.JFrame {
 
     private void aquabtn3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aquabtn3ActionPerformed
         // TODO add your handling code here:
+        drawcardsound();
         if(energy <= 0){
             crossout();
         }else{
@@ -936,6 +959,7 @@ public class Adventure extends javax.swing.JFrame {
 
     private void aquabtn4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aquabtn4ActionPerformed
         // TODO add your handling code here:
+        drawcardsound();
         if(energy <= 0){
             crossout();
         }else{
@@ -952,6 +976,7 @@ public class Adventure extends javax.swing.JFrame {
 
     private void beastbtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_beastbtn1ActionPerformed
         // TODO add your handling code here:
+        drawcardsound();
         if(energy <= 0){
             crossout();
         }else{
@@ -968,6 +993,7 @@ public class Adventure extends javax.swing.JFrame {
 
     private void beastbtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_beastbtn2ActionPerformed
         // TODO add your handling code here:
+        drawcardsound();
         if(energy <= 0){
             crossout();
         }else{
@@ -984,6 +1010,7 @@ public class Adventure extends javax.swing.JFrame {
 
     private void beastbtn3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_beastbtn3ActionPerformed
         // TODO add your handling code here:
+        drawcardsound();
         if(energy <= 0){
             crossout();
         }else{
@@ -999,7 +1026,8 @@ public class Adventure extends javax.swing.JFrame {
     }//GEN-LAST:event_beastbtn3ActionPerformed
 
     private void beastbtn4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_beastbtn4ActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code her
+        drawcardsound();
         if(energy <= 0){
             crossout();
         }else{
@@ -1012,7 +1040,10 @@ public class Adventure extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_beastbtn4ActionPerformed
-
+    public void drawcardsound(){
+        String drawcard = "C:\\Users\\Suenlie\\Downloads\\Deepwoken Talent Card Flip Sound Effect.wav";
+        PlayMusicOnce(drawcard);
+    }
     
     public void enemyAttack(){
         Random rand = new Random();
@@ -1211,6 +1242,8 @@ public class Adventure extends javax.swing.JFrame {
     private void btnEndturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEndturnActionPerformed
         // TODO add your handling code here:
         
+        
+        
         lblreptilecard1.setVisible(false);
         lblreptilecard2.setVisible(false);
         lblreptilecard3.setVisible(false);
@@ -1230,23 +1263,38 @@ public class Adventure extends javax.swing.JFrame {
         
         attack(a,b,c,d,e,f,g,h,j,k,l,m);
         enemyAttack();
+        
         removecrossout();
         randomgeneratecards();
-        energy+=2;
+        if(energy <10){
+            if(energy  == 9){
+                energy++;
+            }else{
+                energy+=2;
+            }
+            
+        }else{
+            energy = 10;
+        }
+        
         energyCounter.setText(energy+"/10");
         if(!enemy1.isAlive()){
             lblenemy1.setVisible(false);
             lbldead.setVisible(true);
             
             new YouWin(name).setVisible(true);
-            this.setVisible(false);
+            
             if (musicClip != null && musicClip.isRunning()) {
                 musicClip.stop(); // Pause the music
             }
+            this.setVisible(false);
         }
         aliveChecker();
         
         PlayMusicOnce(stopslice);
+        countRound++;
+        roundCounter.setText("Round "+countRound);
+ 
        
     }//GEN-LAST:event_btnEndturnActionPerformed
 

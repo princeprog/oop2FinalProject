@@ -28,9 +28,10 @@ public class VS extends javax.swing.JFrame {
     public VS(){
         initComponents();
     }
-    
-    public VS(String name) {
+    int slp = 0;
+    public VS(String name,int slp) {
         initComponents();
+        this.slp = slp;
         this.name = name;
         musicClip = PlayMusic(filepath);
         btnStart.setBackground(new java.awt.Color(0,0,0,0));
@@ -46,6 +47,10 @@ public class VS extends javax.swing.JFrame {
     private void initComponents() {
 
         btnStart = new javax.swing.JButton();
+        LBLBEAST = new javax.swing.JLabel();
+        LBLBEAST1 = new javax.swing.JLabel();
+        LBLBEAST2 = new javax.swing.JLabel();
+        LBLBEAST3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -57,9 +62,21 @@ public class VS extends javax.swing.JFrame {
                 btnStartActionPerformed(evt);
             }
         });
-        getContentPane().add(btnStart, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 510, 130, 50));
+        getContentPane().add(btnStart, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 510, 130, 50));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/finalproject/images/START (1).png"))); // NOI18N
+        LBLBEAST.setIcon(new javax.swing.ImageIcon(getClass().getResource("/finalproject/images/enemyfinal.png"))); // NOI18N
+        getContentPane().add(LBLBEAST, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 220, 200, 160));
+
+        LBLBEAST1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/finalproject/images/beastfinal (1).gif"))); // NOI18N
+        getContentPane().add(LBLBEAST1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 220, 180, 110));
+
+        LBLBEAST2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/finalproject/images/aquafinels.gif"))); // NOI18N
+        getContentPane().add(LBLBEAST2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, 180, 110));
+
+        LBLBEAST3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/finalproject/images/reptile-ezgif.com-resize.gif"))); // NOI18N
+        getContentPane().add(LBLBEAST3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 320, 130, 100));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/finalproject/images/backgrounds/START (2).png"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 600));
 
         pack();
@@ -67,7 +84,7 @@ public class VS extends javax.swing.JFrame {
 
     private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
         // TODO add your handling code here:
-        new Adventure(name).setVisible(true);
+        new Adventure(name,slp).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnStartActionPerformed
 
@@ -125,6 +142,10 @@ public class VS extends javax.swing.JFrame {
     }   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel LBLBEAST;
+    private javax.swing.JLabel LBLBEAST1;
+    private javax.swing.JLabel LBLBEAST2;
+    private javax.swing.JLabel LBLBEAST3;
     private javax.swing.JButton btnStart;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables

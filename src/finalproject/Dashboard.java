@@ -8,6 +8,7 @@ package finalproject;
  *
  * @author Suenlie
  */
+import java.awt.Color;
 import javax.swing.*;
 import java.io.File;
 import javax.sound.sampled.AudioInputStream;
@@ -39,7 +40,7 @@ public class Dashboard extends javax.swing.JFrame {
         txtDisplayName.setText(name);
         btnAdventure.setBackground(new java.awt.Color(0,0,0,0));
         btnArena.setBackground(new java.awt.Color(0,0,0,0));
-        btnTournament.setBackground(new java.awt.Color(0,0,0,0));
+        btnInventory.setBackground(new java.awt.Color(0,0,0,0));
         btnLeaderboard.setBackground(new java.awt.Color(0,0,0,0));
         
         
@@ -59,7 +60,7 @@ public class Dashboard extends javax.swing.JFrame {
         txtDisplayName = new javax.swing.JLabel();
         btnAdventure = new javax.swing.JButton();
         btnArena = new javax.swing.JButton();
-        btnTournament = new javax.swing.JButton();
+        btnInventory = new javax.swing.JButton();
         btnLeaderboard = new javax.swing.JButton();
         lblreptile = new javax.swing.JLabel();
         lblbeast = new javax.swing.JLabel();
@@ -75,6 +76,11 @@ public class Dashboard extends javax.swing.JFrame {
         getContentPane().add(txtDisplayName, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 260, 120));
 
         btnAdventure.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAdventure.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnAdventureMouseEntered(evt);
+            }
+        });
         btnAdventure.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAdventureActionPerformed(evt);
@@ -90,13 +96,13 @@ public class Dashboard extends javax.swing.JFrame {
         });
         getContentPane().add(btnArena, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 170, 200, 90));
 
-        btnTournament.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnTournament.addActionListener(new java.awt.event.ActionListener() {
+        btnInventory.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnInventory.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTournamentActionPerformed(evt);
+                btnInventoryActionPerformed(evt);
             }
         });
-        getContentPane().add(btnTournament, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 300, 200, 90));
+        getContentPane().add(btnInventory, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 300, 200, 90));
 
         btnLeaderboard.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnLeaderboard.addActionListener(new java.awt.event.ActionListener() {
@@ -116,7 +122,7 @@ public class Dashboard extends javax.swing.JFrame {
         lblaqua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/finalproject/images/aquafinels.gif"))); // NOI18N
         getContentPane().add(lblaqua, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 290, 170, 130));
 
-        dashboardBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/finalproject/images/backgrounds/dashboardbg.png"))); // NOI18N
+        dashboardBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/finalproject/images/backgrounds/WAKBALOS.png"))); // NOI18N
         getContentPane().add(dashboardBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
@@ -129,19 +135,21 @@ public class Dashboard extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "Available Soon!", "Soon!", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btnArenaActionPerformed
 
-    private void btnTournamentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTournamentActionPerformed
+    private void btnInventoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInventoryActionPerformed
         // TODO add your handling code here:
         String btnsound = "C:\\Users\\Suenlie\\Downloads\\Menu Game Button Click Sound Effect.wav";
         PlayMusic(btnsound);
-           JOptionPane.showMessageDialog(null, "Available Soon!", "Soon!", JOptionPane.INFORMATION_MESSAGE);
+        INVENTORY inventory = new INVENTORY(name,slp);
+        inventory.setVisible(true);
+        this.setVisible(false);
 
-    }//GEN-LAST:event_btnTournamentActionPerformed
+    }//GEN-LAST:event_btnInventoryActionPerformed
 
     private void btnLeaderboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLeaderboardActionPerformed
         // TODO add your handling code here:
         String btnsound = "C:\\Users\\Suenlie\\Downloads\\Menu Game Button Click Sound Effect.wav";
         PlayMusic(btnsound);
-        JOptionPane.showMessageDialog(null, "Available Soon!", "Soon!", JOptionPane.INFORMATION_MESSAGE);
+        
     }//GEN-LAST:event_btnLeaderboardActionPerformed
 
     private void btnAdventureActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdventureActionPerformed
@@ -149,9 +157,14 @@ public class Dashboard extends javax.swing.JFrame {
         if (musicClip != null && musicClip.isRunning()) {
             musicClip.stop(); // Pause the music
         }
-        new VS(name).setVisible(true);
+        new VS(name,slp).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnAdventureActionPerformed
+
+    private void btnAdventureMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAdventureMouseEntered
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_btnAdventureMouseEntered
 
     /**
      * @param args the command line arguments
@@ -211,8 +224,8 @@ public class Dashboard extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdventure;
     private javax.swing.JButton btnArena;
+    private javax.swing.JButton btnInventory;
     private javax.swing.JButton btnLeaderboard;
-    private javax.swing.JButton btnTournament;
     private javax.swing.JLabel dashboardBackground;
     private javax.swing.JLabel lblaqua;
     private javax.swing.JLabel lblbeast;
