@@ -5,6 +5,14 @@
 package finalproject;
 
 import java.io.File;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -23,17 +31,60 @@ public class DEFEATED extends javax.swing.JFrame {
     
     private Clip musicClip;
     
+    Connection con; //variable for databse connection
+    Statement st; //variable for the sql
+    ArrayList<Players> players = new ArrayList<>(); //arraylist for the table
+    
     public DEFEATED(){
         initComponents();
     }
+    int stage;
     int slp = 0;
     String lose = "C:\\Users\\Suenlie\\Downloads\\Axie Infinity- Defeat Sound Effect.wav";
-    public DEFEATED(String name, int slp) {
+    public DEFEATED(String name, int slp,int stage) {
         initComponents();
         musicClip = PlayMusic(lose);
+        this.stage = stage;
         this.name = name;
         this.slp = slp;
         returnbtn.setBackground(new java.awt.Color(0,0,0,0));
+    }
+    
+    public void update(String name, int stage, int slp){
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/wakbalo", "root", "");
+            String sql = "UPDATE `userprof` SET slp ='" + slp + "',stage='"+stage+"' WHERE name ='" + name + "'";
+            st = con.createStatement();
+            st.execute(sql);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(YouWin.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(YouWin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        fetch();
+    }
+    
+    public void fetch(){
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/wakbalo", "root", "");
+            String sql = "select * from userprof";
+            st = con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                Players user = new Players(rs.getString("name"), rs.getInt("stage"), rs.getInt("slp")); //Calling the Students class
+                players.add(user);
+            }
+            for ( Players user : players) { //
+                Object[] row = new Object[3];
+                row[0] = user.getName();
+                row[1] = user.getStage();
+                row[2] = user.getSlp();
+            }
+        }catch(ClassNotFoundException | SQLException ex){
+            Logger.getLogger(Welcome.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -78,11 +129,28 @@ public class DEFEATED extends javax.swing.JFrame {
 
     private void returnbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnbtnActionPerformed
         // TODO add your handling code here:
+        slp -= 25;
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/wakbalo", "root", "");
+            String sql = "select * from userprof where name='" + name + "'";
+            st = con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            if(rs.next()==true){
+                update(name,stage,slp);
+                fetch();
+            }
+            
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(YouWin.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(YouWin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         if (musicClip != null && musicClip.isRunning()) {
             musicClip.stop(); // Pause the music
         }
-        slp -= 25;
-        new Dashboard(name,slp).setVisible(true);
+        new Dashboard(name,slp,stage).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_returnbtnActionPerformed
     

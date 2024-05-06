@@ -23,7 +23,7 @@ public class Dashboard extends javax.swing.JFrame {
      */
     private Clip musicClip;
     
-    int slp = 0;
+    int slp;
     String name;
     public Dashboard() {
         initComponents();
@@ -31,9 +31,10 @@ public class Dashboard extends javax.swing.JFrame {
     }
     
     String filepath = "C:\\Users\\Suenlie\\Downloads\\axiemusic.wav";
-    
-    public Dashboard(String name, int slp){
+    int stage;
+    public Dashboard(String name, int slp, int stage){
         initComponents();
+        this.stage = stage;
         this.name = name;
         this.slp = slp;
         musicClip = PlayMusic(filepath);
@@ -42,11 +43,19 @@ public class Dashboard extends javax.swing.JFrame {
         btnArena.setBackground(new java.awt.Color(0,0,0,0));
         btnInventory.setBackground(new java.awt.Color(0,0,0,0));
         btnLeaderboard.setBackground(new java.awt.Color(0,0,0,0));
-        
-        
     }
     
-    int musicStop = 0;
+    public Dashboard(String name, int slp,int stage,int ms){
+        initComponents();
+        this.stage = stage;
+        this.name = name;
+        this.slp = slp;
+        txtDisplayName.setText(name);
+        btnAdventure.setBackground(new java.awt.Color(0,0,0,0));
+        btnArena.setBackground(new java.awt.Color(0,0,0,0));
+        btnInventory.setBackground(new java.awt.Color(0,0,0,0));
+        btnLeaderboard.setBackground(new java.awt.Color(0,0,0,0));
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -132,14 +141,15 @@ public class Dashboard extends javax.swing.JFrame {
         // TODO add your handling code here:
         String btnsound = "C:\\Users\\Suenlie\\Downloads\\Menu Game Button Click Sound Effect.wav";
         PlayMusic(btnsound);
-        JOptionPane.showMessageDialog(null, "Available Soon!", "Soon!", JOptionPane.INFORMATION_MESSAGE);
+        new Wakbalos(name, slp,stage).setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnArenaActionPerformed
 
     private void btnInventoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInventoryActionPerformed
         // TODO add your handling code here:
         String btnsound = "C:\\Users\\Suenlie\\Downloads\\Menu Game Button Click Sound Effect.wav";
         PlayMusic(btnsound);
-        INVENTORY inventory = new INVENTORY(name,slp);
+        INVENTORY inventory = new INVENTORY(name,slp,stage);
         inventory.setVisible(true);
         this.setVisible(false);
 
@@ -147,17 +157,17 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void btnLeaderboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLeaderboardActionPerformed
         // TODO add your handling code here:
-        String btnsound = "C:\\Users\\Suenlie\\Downloads\\Menu Game Button Click Sound Effect.wav";
-        PlayMusic(btnsound);
+        new Leaderboards(name,slp,stage).setVisible(true);
+        this.setVisible(false);
         
     }//GEN-LAST:event_btnLeaderboardActionPerformed
 
     private void btnAdventureActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdventureActionPerformed
         // TODO add your handling code here:
         if (musicClip != null && musicClip.isRunning()) {
-            musicClip.stop(); // Pause the music
+            musicClip.stop();
         }
-        new VS(name,slp).setVisible(true);
+        new AdventureMap(name,slp,stage).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnAdventureActionPerformed
 

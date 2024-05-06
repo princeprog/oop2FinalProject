@@ -17,10 +17,14 @@ public class INVENTORY extends javax.swing.JFrame {
     public INVENTORY(){
             
     }
+    
+    
     int slp = 0;
     String name;
-    public INVENTORY(String name,int slp) {
+    int stage;
+    public INVENTORY(String name,int slp,int stage) {
         initComponents();
+        this.stage = stage;
         returnbtn.setBackground(new java.awt.Color(0,0,0,0));
         this.slp = slp;
         this.name = name;
@@ -64,7 +68,7 @@ public class INVENTORY extends javax.swing.JFrame {
 
     private void returnbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnbtnActionPerformed
         // TODO add your handling code here:
-        Dashboard dash = new Dashboard(name,slp);
+        Dashboard dash = new Dashboard(name,slp,stage,0);
         dash.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_returnbtnActionPerformed

@@ -15,6 +15,18 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.*;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+
 public class Welcome extends javax.swing.JFrame {
 
     /**
@@ -22,14 +34,50 @@ public class Welcome extends javax.swing.JFrame {
      */
     String name;
     int slp = 0;
+    int stage = 1;
     
-    
+    Connection con; //variable for databse connection
+    Statement st; //variable for the sql
+    ArrayList<Players> players = new ArrayList<>(); //arraylist for the table
     
     public Welcome() {
         initComponents();
-        
         txtName.setBackground(new java.awt.Color(0,0,0,1));
         submitName.setBackground(new java.awt.Color(0,0,0,0));
+    }
+    
+    public void fetch(){
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/wakbalo", "root", "");
+            String sql = "select * from userprof";
+            st = con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                Players user = new Players(rs.getString("name"), rs.getInt("stage"), rs.getInt("slp")); //Calling the Students class
+                players.add(user);
+            }
+            for ( Players user : players) { //
+                Object[] row = new Object[3];
+                row[0] = user.getName();
+                row[1] = user.getStage();
+                row[2] = user.getSlp();
+            }
+        }catch(ClassNotFoundException | SQLException ex){
+            Logger.getLogger(Welcome.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void addPlayer(String name, int stage, int slp) throws SQLException{
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/wakbalo", "root", "");
+            String sql = "INSERT INTO `userprof`(`Name`, `Stage`, `Slp`) " + "VALUES ('" + name + "','" + stage + "','" + slp + "')";
+            st = con.createStatement();
+            st.execute(sql);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Welcome.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -79,15 +127,39 @@ public class Welcome extends javax.swing.JFrame {
 
     private void submitNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitNameActionPerformed
         // TODO add your handling code here:
-        name = txtName.getText();
+        name = txtName.getText().trim();
         
         
-        if(name.isEmpty()){
-            JOptionPane.showMessageDialog(null, "Please enter your name", "Invalid Name", JOptionPane.WARNING_MESSAGE);
+        if(!name.isEmpty()){
+            try {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                con = DriverManager.getConnection("jdbc:mysql://localhost:3306/wakbalo", "root", "");
+                String sql = "select name from userprof where name='" + name + "'";
+                st = con.createStatement();
+                ResultSet rs = st.executeQuery(sql);
+                
+                if(rs.next()==true){ //checks if the last name already exist in the database table
+                    JOptionPane.showConfirmDialog(null, "Player name already exist", "ERROR", JOptionPane.WARNING_MESSAGE);
+                }else{
+                    addPlayer(name, stage, slp); //calls saveUser method to save new record to the database
+                    fetch(); //calls fetch method to update the GUI table
+                    new Dashboard(name,slp,stage).setVisible(true);
+                    this.setVisible(false);
+                    
+                }
+                
+                
+
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(Welcome.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(Welcome.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }else{
-            new Dashboard(name,slp).setVisible(true);
-            this.setVisible(false);
+            JOptionPane.showConfirmDialog(null, "Please input your name", "ERROR", JOptionPane.WARNING_MESSAGE);
         }
+        
+        
     }//GEN-LAST:event_submitNameActionPerformed
 
     /**
@@ -130,4 +202,8 @@ public class Welcome extends javax.swing.JFrame {
     private javax.swing.JButton submitName;
     public javax.swing.JTextField txtName;
     // End of variables declaration//GEN-END:variables
+
+    private void alert(String this_student_record_already_exist) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

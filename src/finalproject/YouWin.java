@@ -5,6 +5,17 @@
 package finalproject;
 
 import java.io.File;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -19,23 +30,66 @@ public class YouWin extends javax.swing.JFrame {
      * Creates new form YouWin
      */
     private Clip musicClip;
-    int slpe = 0;
+    int slp;
     String name;
     String filepath = "C:\\Users\\Suenlie\\Downloads\\Queen - We are the champions (Chorus only) (1).wav";
+    
+    Connection con; //variable for databse connection
+    Statement st; //variable for the sql
+    ArrayList<Players> players = new ArrayList<>(); //arraylist for the table
     
     public YouWin(){
         initComponents();
     }
-    
-    public YouWin(String name) {
+    int stage;
+    public YouWin(String name,int slp,int stage) {
         initComponents();
         returnbtn.setBackground(new java.awt.Color(0,0,0,0));
-        
+        this.slp = slp;
+        this.stage = stage;
         this.name = name;
         musicClip = PlayMusic(filepath);
         
         
     }
+    
+    public void update(String name, int stage, int slp){
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/wakbalo", "root", "");
+            String sql = "UPDATE `userprof` SET slp ='" + slp + "',stage='"+stage+"' WHERE name ='" + name + "'";
+            st = con.createStatement();
+            st.execute(sql);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(YouWin.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(YouWin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        fetch();
+    }
+    
+    public void fetch(){
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/wakbalo", "root", "");
+            String sql = "select * from userprof";
+            st = con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                Players user = new Players(rs.getString("name"), rs.getInt("stage"), rs.getInt("slp")); //Calling the Students class
+                players.add(user);
+            }
+            for ( Players user : players) { //
+                Object[] row = new Object[3];
+                row[0] = user.getName();
+                row[1] = user.getStage();
+                row[2] = user.getSlp();
+            }
+        }catch(ClassNotFoundException | SQLException ex){
+            Logger.getLogger(Welcome.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -79,11 +133,30 @@ public class YouWin extends javax.swing.JFrame {
 
     private void returnbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnbtnActionPerformed
         // TODO add your handling code here:
-        slpe += 50;
-        if (musicClip != null && musicClip.isRunning()) {
-                musicClip.stop(); // Pause the music
+        slp += 50;
+        
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/wakbalo", "root", "");
+            String sql = "select * from userprof where name='" + name + "'";
+            st = con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            if(rs.next()==true){
+                update(name,stage,slp);
+                fetch();
             }
-        Dashboard obj = new Dashboard(name,slpe);
+            
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(YouWin.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(YouWin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        if (musicClip != null && musicClip.isRunning()) {
+                musicClip.stop();
+            }
+        Dashboard obj = new Dashboard(name,slp,stage);
         obj.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_returnbtnActionPerformed

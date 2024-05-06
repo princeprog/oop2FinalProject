@@ -29,12 +29,32 @@ public class VS extends javax.swing.JFrame {
         initComponents();
     }
     int slp = 0;
-    public VS(String name,int slp) {
+    int stage;
+    public VS(String name,int slp, int stage) {
         initComponents();
+        this.stage = stage;
         this.slp = slp;
         this.name = name;
+        userName.setText(name);
+        bgChanger();
         musicClip = PlayMusic(filepath);
         btnStart.setBackground(new java.awt.Color(0,0,0,0));
+    }
+    
+    public void bgChanger(){
+        if(stage == 1){
+            gaisano.setVisible(true);
+            shopwise.setVisible(false);
+            starmall.setVisible(false);
+        }else if(stage == 2){
+            gaisano.setVisible(false);
+            shopwise.setVisible(true);
+            starmall.setVisible(false);
+        }else if(stage == 3){
+            gaisano.setVisible(false);
+            shopwise.setVisible(false);
+            starmall.setVisible(true);
+        }
     }
 
     /**
@@ -46,15 +66,22 @@ public class VS extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        userName = new javax.swing.JLabel();
         btnStart = new javax.swing.JButton();
-        LBLBEAST = new javax.swing.JLabel();
         LBLBEAST1 = new javax.swing.JLabel();
         LBLBEAST2 = new javax.swing.JLabel();
         LBLBEAST3 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        gaisano = new javax.swing.JLabel();
+        shopwise = new javax.swing.JLabel();
+        starmall = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        userName.setFont(new java.awt.Font("Lucida Fax", 0, 18)); // NOI18N
+        userName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        userName.setText("jLabel2");
+        getContentPane().add(userName, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, 160, 40));
 
         btnStart.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnStart.addActionListener(new java.awt.event.ActionListener() {
@@ -62,29 +89,32 @@ public class VS extends javax.swing.JFrame {
                 btnStartActionPerformed(evt);
             }
         });
-        getContentPane().add(btnStart, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 510, 130, 50));
-
-        LBLBEAST.setIcon(new javax.swing.ImageIcon(getClass().getResource("/finalproject/images/enemyfinal.png"))); // NOI18N
-        getContentPane().add(LBLBEAST, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 220, 200, 160));
+        getContentPane().add(btnStart, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 510));
 
         LBLBEAST1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/finalproject/images/beastfinal (1).gif"))); // NOI18N
-        getContentPane().add(LBLBEAST1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 220, 180, 110));
+        getContentPane().add(LBLBEAST1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 170, 180, 110));
 
         LBLBEAST2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/finalproject/images/aquafinels.gif"))); // NOI18N
-        getContentPane().add(LBLBEAST2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, 180, 110));
+        getContentPane().add(LBLBEAST2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 170, 180, 110));
 
         LBLBEAST3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/finalproject/images/reptile-ezgif.com-resize.gif"))); // NOI18N
-        getContentPane().add(LBLBEAST3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 320, 130, 100));
+        getContentPane().add(LBLBEAST3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 250, 130, 100));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/finalproject/images/backgrounds/START (2).png"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 600));
+        gaisano.setIcon(new javax.swing.ImageIcon(getClass().getResource("/finalproject/images/backgrounds/vsGaisano.png"))); // NOI18N
+        getContentPane().add(gaisano, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 910, 510));
+
+        shopwise.setIcon(new javax.swing.ImageIcon(getClass().getResource("/finalproject/images/backgrounds/vsShopwise (1).png"))); // NOI18N
+        getContentPane().add(shopwise, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 910, 510));
+
+        starmall.setIcon(new javax.swing.ImageIcon(getClass().getResource("/finalproject/images/backgrounds/vsStarmall.png"))); // NOI18N
+        getContentPane().add(starmall, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 910, 510));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
         // TODO add your handling code here:
-        new Adventure(name,slp).setVisible(true);
+        new Adventure(name,slp,stage).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnStartActionPerformed
 
@@ -142,11 +172,13 @@ public class VS extends javax.swing.JFrame {
     }   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel LBLBEAST;
     private javax.swing.JLabel LBLBEAST1;
     private javax.swing.JLabel LBLBEAST2;
     private javax.swing.JLabel LBLBEAST3;
     private javax.swing.JButton btnStart;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel gaisano;
+    private javax.swing.JLabel shopwise;
+    private javax.swing.JLabel starmall;
+    private javax.swing.JLabel userName;
     // End of variables declaration//GEN-END:variables
 }
