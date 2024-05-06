@@ -151,7 +151,7 @@ public class Leaderboards extends javax.swing.JFrame {
 
     private void returnBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnBtnActionPerformed
         // TODO add your handling code here:
-        new Dashboard(name,slp,stage,0).setVisible(true);
+        new Dashboard(name,slp,stage).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_returnBtnActionPerformed
 

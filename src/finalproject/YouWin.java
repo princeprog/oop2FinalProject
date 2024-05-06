@@ -133,7 +133,7 @@ public class YouWin extends javax.swing.JFrame {
 
     private void returnbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnbtnActionPerformed
         // TODO add your handling code here:
-        slp += 50;
+        
         
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");

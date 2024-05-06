@@ -19,7 +19,7 @@ import java.util.logging.Logger;
  *
  * @author Suenlie
  */
-public class Adventure extends javax.swing.JFrame {
+public class Stage3 extends javax.swing.JFrame {
 
     /**
      * Creates new form Adventure
@@ -33,16 +33,12 @@ public class Adventure extends javax.swing.JFrame {
     Reptile reptile = new Reptile(480);
     Beast beast = new Beast(480);
     Aqua aqua = new Aqua(480);
-    Enemy enemy1 = new Enemy(580);
-    Enemy enemy2 = new Enemy(780);
     Enemy enemy = new Enemy(980);
     
     int reptilehealth = reptile.getHealthPoints();
     int aquahealth = aqua.getHealthPoints();
     int beasthealth = beast.getHealthPoints();
-    int enemyHealth1 = enemy1.getHealthPoints();
-    int enemyHealth2 = enemy2.getHealthPoints();
-    int enemyHealth3 = enemy.getHealthPoints();
+    int enemyHealth = enemy.getHealthPoints();
     int stage = 1;
     
     private Clip musicClip;
@@ -73,10 +69,10 @@ public class Adventure extends javax.swing.JFrame {
     int holder12;
     
     String name;
-    
-    public Adventure(){
+    int slp;
+    public Stage3(){
         initComponents();
-        stageChecker();
+        
         this.name = name;
         this.slp = slp;
         musicClip = PlayMusic(filepath);
@@ -88,6 +84,7 @@ public class Adventure extends javax.swing.JFrame {
         lblbeasthp.setText("Beast: "+beasthealth);
         lblaquahp.setText("Aqua: "+aquahealth);
         lblreptilehp.setText("Reptile: "+reptilehealth);
+        lblenemyhp.setText("Enemy: "+enemyHealth);
         
         reptilebtn1.setBackground(new java.awt.Color(0,0,0,0));
         reptilebtn2.setBackground(new java.awt.Color(0,0,0,0));
@@ -121,11 +118,10 @@ public class Adventure extends javax.swing.JFrame {
         lblbeastcard3.setVisible(false);
         lblbeastcard4.setVisible(false);
     }
-    int slp =0;
-    public Adventure(String name, int slp,int stage){
+   
+    public Stage3(String name, int slp,int stage){
         initComponents();
         this.stage = stage;
-        stageChecker();
         this.name = name;
         this.slp = slp;
         musicClip = PlayMusic(filepath);
@@ -137,6 +133,7 @@ public class Adventure extends javax.swing.JFrame {
         lblbeasthp.setText("Beast: "+beasthealth);
         lblaquahp.setText("Aqua: "+aquahealth);
         lblreptilehp.setText("Reptile: "+reptilehealth);
+        lblenemyhp.setText("Enemy: "+enemyHealth);
         
         reptilebtn1.setBackground(new java.awt.Color(0,0,0,0));
         reptilebtn2.setBackground(new java.awt.Color(0,0,0,0));
@@ -170,25 +167,6 @@ public class Adventure extends javax.swing.JFrame {
         lblbeastcard3.setVisible(false);
         lblbeastcard4.setVisible(false);
         
-    }
-    
-    public void stageChecker(){
-        if(stage == 1){
-            lblenemy1.setVisible(true);
-            lblenemy2.setVisible(false);
-            lblenemy3.setVisible(false);
-            lblenemyhp.setText("Enemy: "+enemyHealth1);
-        }else if(stage == 2){
-            lblenemy1.setVisible(false);
-            lblenemy2.setVisible(true);
-            lblenemy3.setVisible(false);
-            lblenemyhp.setText("Enemy: "+enemyHealth2);
-        }else if(stage == 3){
-            lblenemy1.setVisible(false);
-            lblenemy2.setVisible(false);
-            lblenemy3.setVisible(true);
-            lblenemyhp.setText("Enemy: "+enemyHealth3);
-        }
     }
     
     
@@ -578,10 +556,10 @@ public class Adventure extends javax.swing.JFrame {
             if (musicClip != null && musicClip.isRunning()) {
                 musicClip.stop();
             }
-            slp-=25;
             reptileghost();
             aquaghost();
             beastghost();
+            slp-=25;
             new DEFEATED(name,slp,stage).setVisible(true);
             this.setVisible(false);
         }
@@ -604,11 +582,9 @@ public class Adventure extends javax.swing.JFrame {
         roundCounter = new javax.swing.JLabel();
         energyCounter = new javax.swing.JLabel();
         lblenemy3 = new javax.swing.JLabel();
-        lblenemy2 = new javax.swing.JLabel();
         lblreptile = new javax.swing.JLabel();
         lblaqua = new javax.swing.JLabel();
         lblbeast = new javax.swing.JLabel();
-        lblenemy1 = new javax.swing.JLabel();
         cross1 = new javax.swing.JLabel();
         cross2 = new javax.swing.JLabel();
         cross3 = new javax.swing.JLabel();
@@ -685,9 +661,6 @@ public class Adventure extends javax.swing.JFrame {
         lblenemy3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/finalproject/images/enemy3.png"))); // NOI18N
         getContentPane().add(lblenemy3, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 110, 250, 190));
 
-        lblenemy2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/finalproject/images/enemy2 (1).png"))); // NOI18N
-        getContentPane().add(lblenemy2, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 110, 250, 190));
-
         lblreptile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/finalproject/images/reptile-ezgif.com-resize.gif"))); // NOI18N
         getContentPane().add(lblreptile, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 140, 130, 110));
 
@@ -696,9 +669,6 @@ public class Adventure extends javax.swing.JFrame {
 
         lblbeast.setIcon(new javax.swing.ImageIcon(getClass().getResource("/finalproject/images/beastfinal (1).gif"))); // NOI18N
         getContentPane().add(lblbeast, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 130, 190, 140));
-
-        lblenemy1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/finalproject/images/enemyfinal.png"))); // NOI18N
-        getContentPane().add(lblenemy1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 130, 190, 170));
 
         cross1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/finalproject/cards/crossed-removebg-preview (2).png"))); // NOI18N
         getContentPane().add(cross1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 450, 60, 60));
@@ -1130,427 +1100,186 @@ public class Adventure extends javax.swing.JFrame {
         int attack2 = rand.nextInt(2);
         int attack3 = rand.nextInt(2);
         int attack4 = rand.nextInt(2);
-        if(stage == 1){
+        
+        if(attack1 == 1){
             if(beast.isAlive()){
-                if(attack1 == 1){
-                    enemy1.enemyAttack1(beast);
-                    beasthealth = beast.getHealthPoints();
-                    beastHealthBar.setValue(beasthealth);
-                    lblbeasthp.setText("Beast: "+beasthealth);
-                }
-
-                if(attack2 == 1){
-                    enemy1.enemyAttack2(beast);
-                    beasthealth = beast.getHealthPoints();
-                    beastHealthBar.setValue(beasthealth);
-                    lblbeasthp.setText("Beast: "+beasthealth);
-                }
-
-                if(attack3 == 1){
-                    enemy1.enemyAttack3(beast);
-                    beasthealth = beast.getHealthPoints();
-                    beastHealthBar.setValue(beasthealth);
-                    lblbeasthp.setText("Beast: "+beasthealth);
-                }
-
-                if(attack4 == 1){
-                    enemy1.enemyAttack4(beast);
-                    beasthealth = beast.getHealthPoints();
-                    beastHealthBar.setValue(beasthealth);
-                    lblbeasthp.setText("Beast: "+beasthealth);
-                }
+                enemy.enemyAttack1(beast);
+            }else if(!beast.isAlive() && aqua.isAlive()){
+                enemy.enemyAttack1(aqua);
+            }else if(!beast.isAlive() && !aqua.isAlive() && reptile.isAlive()){
+                enemy.enemyAttack1(reptile);
             }
-            else if(aqua.isAlive() && !beast.isAlive()){
-                if(attack1 == 1){
-                    enemy1.enemyAttack1(aqua);
-                    aquahealth = aqua.getHealthPoints();
-                    aquaHealthBar.setValue(aquahealth);
-                    lblaquahp.setText("Aqua: "+aquahealth);
-                }
-
-                if(attack2 == 1){
-                    enemy1.enemyAttack2(aqua);
-                    aquahealth = aqua.getHealthPoints();
-                    aquaHealthBar.setValue(aquahealth);
-                    lblaquahp.setText("Aqua: "+aquahealth);
-                }
-
-                if(attack3 == 1){
-                    enemy1.enemyAttack3(aqua);
-                    aquahealth = aqua.getHealthPoints();
-                    aquaHealthBar.setValue(aquahealth);
-                    lblaquahp.setText("Aqua: "+aquahealth);
-                }
-
-                if(attack4 == 1){
-                    enemy1.enemyAttack4(aqua);
-                    aquahealth = aqua.getHealthPoints();
-                    aquaHealthBar.setValue(aquahealth);
-                    lblaquahp.setText("Aqua: "+aquahealth);
-                }
-            }
-            else if(reptile.isAlive() && !beast.isAlive() && !aqua.isAlive()){
-                if(attack1 == 1){
-                    enemy1.enemyAttack1(reptile);
-                    reptilehealth = reptile.getHealthPoints();
-                    reptileHealthBar.setValue(reptilehealth);
-                    lblreptilehp.setText("Reptile: "+reptilehealth);
-                }
-
-                if(attack2 == 1){
-                    enemy1.enemyAttack2(reptile);
-                    reptilehealth = reptile.getHealthPoints();
-                    reptileHealthBar.setValue(reptilehealth);
-                    lblreptilehp.setText("Reptile: "+reptilehealth);
-                }
-
-                if(attack3 == 1){
-                    enemy1.enemyAttack3(reptile);
-                    reptilehealth = reptile.getHealthPoints();
-                    reptileHealthBar.setValue(reptilehealth);
-                    lblreptilehp.setText("Reptile: "+reptilehealth);
-                }
-
-                if(attack4 == 1){
-                    enemy1.enemyAttack4(reptile);
-                    reptilehealth = reptile.getHealthPoints();
-                    reptileHealthBar.setValue(reptilehealth);
-                    lblreptilehp.setText("Reptile: "+reptilehealth);
-                }
-            }
-        }else if(stage == 2){
+            
+            beasthealth = beast.getHealthPoints();
+            beastHealthBar.setValue(beasthealth);
+            lblbeasthp.setText("Beast: "+beasthealth);
+            
+            aquahealth = aqua.getHealthPoints();
+            aquaHealthBar.setValue(aquahealth);
+            lblaquahp.setText("Aqua: "+aquahealth);
+            
+            reptilehealth = reptile.getHealthPoints();
+            reptileHealthBar.setValue(reptilehealth);
+            lblreptilehp.setText("Reptile: "+reptilehealth);
+        }else if(attack2 == 1){
             if(beast.isAlive()){
-                if(attack1 == 1){
-                    enemy2.enemyAttack1(beast);
-                    beasthealth = beast.getHealthPoints();
-                    beastHealthBar.setValue(beasthealth);
-                    lblbeasthp.setText("Beast: "+beasthealth);
-                }
-
-                if(attack2 == 1){
-                    enemy2.enemyAttack2(beast);
-                    beasthealth = beast.getHealthPoints();
-                    beastHealthBar.setValue(beasthealth);
-                    lblbeasthp.setText("Beast: "+beasthealth);
-                }
-
-                if(attack3 == 1){
-                    enemy2.enemyAttack3(beast);
-                    beasthealth = beast.getHealthPoints();
-                    beastHealthBar.setValue(beasthealth);
-                    lblbeasthp.setText("Beast: "+beasthealth);
-                }
-
-                if(attack4 == 1){
-                    enemy2.enemyAttack4(beast);
-                    beasthealth = beast.getHealthPoints();
-                    beastHealthBar.setValue(beasthealth);
-                    lblbeasthp.setText("Beast: "+beasthealth);
-                }
+                enemy.enemyAttack2(beast);
+            }else if(!beast.isAlive() && aqua.isAlive()){
+                enemy.enemyAttack2(aqua);
+            }else if(!beast.isAlive() && !aqua.isAlive() && reptile.isAlive()){
+                enemy.enemyAttack2(reptile);
             }
-            else if(aqua.isAlive() && !beast.isAlive()){
-                if(attack1 == 1){
-                    enemy2.enemyAttack1(aqua);
-                    aquahealth = aqua.getHealthPoints();
-                    aquaHealthBar.setValue(aquahealth);
-                    lblaquahp.setText("Aqua: "+aquahealth);
-                }
-
-                if(attack2 == 1){
-                    enemy2.enemyAttack2(aqua);
-                    aquahealth = aqua.getHealthPoints();
-                    aquaHealthBar.setValue(aquahealth);
-                    lblaquahp.setText("Aqua: "+aquahealth);
-                }
-
-                if(attack3 == 1){
-                    enemy2.enemyAttack3(aqua);
-                    aquahealth = aqua.getHealthPoints();
-                    aquaHealthBar.setValue(aquahealth);
-                    lblaquahp.setText("Aqua: "+aquahealth);
-                }
-
-                if(attack4 == 1){
-                    enemy2.enemyAttack4(aqua);
-                    aquahealth = aqua.getHealthPoints();
-                    aquaHealthBar.setValue(aquahealth);
-                    lblaquahp.setText("Aqua: "+aquahealth);
-                }
+            
+            beasthealth = beast.getHealthPoints();
+            beastHealthBar.setValue(beasthealth);
+            lblbeasthp.setText("Beast: "+beasthealth);
+            
+            aquahealth = aqua.getHealthPoints();
+            aquaHealthBar.setValue(aquahealth);
+            lblaquahp.setText("Aqua: "+aquahealth);
+            
+            reptilehealth = reptile.getHealthPoints();
+            reptileHealthBar.setValue(reptilehealth);
+            lblreptilehp.setText("Reptile: "+reptilehealth);
+        }else if(attack3 == 1){
+            if(beast.isAlive()){
+                enemy.enemyAttack3(beast);
+            }else if(!beast.isAlive() && aqua.isAlive()){
+                enemy.enemyAttack3(aqua);
+            }else if(!beast.isAlive() && !aqua.isAlive() && reptile.isAlive()){
+                enemy.enemyAttack3(reptile);
             }
-            else if(reptile.isAlive() && !beast.isAlive() && !aqua.isAlive()){
-                if(attack1 == 1){
-                    enemy2.enemyAttack1(reptile);
-                    reptilehealth = reptile.getHealthPoints();
-                    reptileHealthBar.setValue(reptilehealth);
-                    lblreptilehp.setText("Reptile: "+reptilehealth);
-                }
-
-                if(attack2 == 1){
-                    enemy2.enemyAttack2(reptile);
-                    reptilehealth = reptile.getHealthPoints();
-                    reptileHealthBar.setValue(reptilehealth);
-                    lblreptilehp.setText("Reptile: "+reptilehealth);
-                }
-
-                if(attack3 == 1){
-                    enemy2.enemyAttack3(reptile);
-                    reptilehealth = reptile.getHealthPoints();
-                    reptileHealthBar.setValue(reptilehealth);
-                    lblreptilehp.setText("Reptile: "+reptilehealth);
-                }
-
-                if(attack4 == 1){
-                    enemy2.enemyAttack4(reptile);
-                    reptilehealth = reptile.getHealthPoints();
-                    reptileHealthBar.setValue(reptilehealth);
-                    lblreptilehp.setText("Reptile: "+reptilehealth);
-                }
+            
+            beasthealth = beast.getHealthPoints();
+            beastHealthBar.setValue(beasthealth);
+            lblbeasthp.setText("Beast: "+beasthealth);
+            
+            aquahealth = aqua.getHealthPoints();
+            aquaHealthBar.setValue(aquahealth);
+            lblaquahp.setText("Aqua: "+aquahealth);
+            
+            reptilehealth = reptile.getHealthPoints();
+            reptileHealthBar.setValue(reptilehealth);
+            lblreptilehp.setText("Reptile: "+reptilehealth);
+        }else if(attack4 == 1){
+            if(beast.isAlive()){
+                enemy.enemyAttack4(beast);
+            }else if(!beast.isAlive() && aqua.isAlive()){
+                enemy.enemyAttack4(aqua);
+            }else if(!beast.isAlive() && !aqua.isAlive() && reptile.isAlive()){
+                enemy.enemyAttack4(reptile);
             }
+            
+            beasthealth = beast.getHealthPoints();
+            beastHealthBar.setValue(beasthealth);
+            lblbeasthp.setText("Beast: "+beasthealth);
+            
+            aquahealth = aqua.getHealthPoints();
+            aquaHealthBar.setValue(aquahealth);
+            lblaquahp.setText("Aqua: "+aquahealth);
+            
+            reptilehealth = reptile.getHealthPoints();
+            reptileHealthBar.setValue(reptilehealth);
+            lblreptilehp.setText("Reptile: "+reptilehealth);
         }
+        
     }
     
-    
-
-    
-    
-    public void attack(int a, int b,int c,int d,int e,int f,int g,int h,int j,int k,int l,int m){
+    public void attack(int a,int b,int c,int d,int e, int f,int g,int h,int j, int k,int l,int m){
         if(a == 1){
-            if(stage == 1){
-                reptile.surpriseInvasion(enemy1);
-                enemyHealth1 = enemy1.getHealthPoints();
-                enemyHealthBar.setValue(enemyHealth1);
-                lblenemyhp.setText("Enemy: "+enemyHealth1);
-            }else if(stage == 2){
-                reptile.surpriseInvasion(enemy2);
-                enemyHealth2 = enemy2.getHealthPoints();
-                enemyHealthBar.setValue(enemyHealth2);
-                lblenemyhp.setText("Enemy: "+enemyHealth2);
-            }else if(stage == 3){
-                reptile.surpriseInvasion(enemy);
-                enemyHealth3 = enemy.getHealthPoints();
-                enemyHealthBar.setValue(enemyHealth3);
-                lblenemyhp.setText("Enemy: "+enemyHealth3);
-            }
+            reptile.surpriseInvasion(enemy);
+            enemyHealth = enemy.getHealthPoints();
+            enemyHealthBar.setValue(enemyHealth);
+            lblenemyhp.setText("Enemy: "+enemyHealth);
+            
             this.a=0;
         }
         
         if(b == 1){
-            if(stage == 1){
-                reptile.disarm(enemy1);
-                enemyHealth1 = enemy1.getHealthPoints();
-                enemyHealthBar.setValue(enemyHealth1);
-                lblenemyhp.setText("Enemy: "+enemyHealth1);
-            }else if(stage == 2){
-                reptile.disarm(enemy2);
-                enemyHealth2 = enemy2.getHealthPoints();
-                enemyHealthBar.setValue(enemyHealth2);
-                lblenemyhp.setText("Enemy: "+enemyHealth2);
-            }else if(stage == 3){
-                reptile.disarm(enemy);
-                enemyHealth3 = enemy.getHealthPoints();
-                enemyHealthBar.setValue(enemyHealth3);
-                lblenemyhp.setText("Enemy: "+enemyHealth3);
-            }
+            reptile.disarm(enemy);
+            enemyHealth = enemy.getHealthPoints();
+            enemyHealthBar.setValue(enemyHealth);
+            lblenemyhp.setText("Enemy: "+enemyHealth);
             this.b=0;
         }
         
         if(c == 1){
-            if(stage == 1){
-                reptile.kotaroBite(enemy1);
-                enemyHealth1 = enemy1.getHealthPoints();
-                enemyHealthBar.setValue(enemyHealth1);
-                lblenemyhp.setText("Enemy: "+enemyHealth1);
-            }else if(stage == 2){
-                reptile.kotaroBite(enemy2);
-                enemyHealth2 = enemy2.getHealthPoints();
-                enemyHealthBar.setValue(enemyHealth2);
-                lblenemyhp.setText("Enemy: "+enemyHealth2);
-            }else if(stage == 3){
-                reptile.kotaroBite(enemy);
-                enemyHealth3 = enemy.getHealthPoints();
-                enemyHealthBar.setValue(enemyHealth3);
-                lblenemyhp.setText("Enemy: "+enemyHealth3);
-            }
+            reptile.kotaroBite(enemy);
+            enemyHealth = enemy.getHealthPoints();
+            enemyHealthBar.setValue(enemyHealth);
+            lblenemyhp.setText("Enemy: "+enemyHealth);
             this.c=0;
         }
         
         if(d == 1){
-            if(stage == 1){
-                reptile.bulkwark(enemy1);
-                enemyHealth1 = enemy1.getHealthPoints();
-                enemyHealthBar.setValue(enemyHealth1);
-                lblenemyhp.setText("Enemy: "+enemyHealth1);
-            }else if(stage == 2){
-                reptile.bulkwark(enemy2);
-                enemyHealth2 = enemy2.getHealthPoints();
-                enemyHealthBar.setValue(enemyHealth2);
-                lblenemyhp.setText("Enemy: "+enemyHealth2);
-            }else if(stage == 3){
-                reptile.bulkwark(enemy);
-                enemyHealth3 = enemy.getHealthPoints();
-                enemyHealthBar.setValue(enemyHealth3);
-                lblenemyhp.setText("Enemy: "+enemyHealth3);
-            }
+            reptile.bulkwark(enemy);
+            enemyHealth = enemy.getHealthPoints();
+            enemyHealthBar.setValue(enemyHealth);
+            lblenemyhp.setText("Enemy: "+enemyHealth);
             this.d=0;
         }
         
         if(e == 1){
-            if(stage == 1){
-                aqua.riskyFish(enemy1);
-                enemyHealth1 = enemy1.getHealthPoints();
-                enemyHealthBar.setValue(enemyHealth1);
-                lblenemyhp.setText("Enemy: "+enemyHealth1);
-            }else if(stage == 2){
-                aqua.riskyFish(enemy2);
-                enemyHealth2 = enemy2.getHealthPoints();
-                enemyHealthBar.setValue(enemyHealth2);
-                lblenemyhp.setText("Enemy: "+enemyHealth2);
-            }else if(stage == 3){
-                aqua.riskyFish(enemy);
-                enemyHealth3 = enemy.getHealthPoints();
-                enemyHealthBar.setValue(enemyHealth3);
-                lblenemyhp.setText("Enemy: "+enemyHealth3);
-            }
+            aqua.riskyFish(enemy);
+            enemyHealth = enemy.getHealthPoints();
+            enemyHealthBar.setValue(enemyHealth);
+            lblenemyhp.setText("Enemy: "+enemyHealth);
             this.e=0;
         }
         
         if(f == 1){
-            if(stage == 1){
-                aqua.upstream(enemy1);
-                enemyHealth3 = enemy1.getHealthPoints();
-                enemyHealthBar.setValue(enemyHealth1);
-                lblenemyhp.setText("Enemy: "+enemyHealth1);
-            }else if(stage == 2){
-                aqua.upstream(enemy2);
-                enemyHealth2 = enemy2.getHealthPoints();
-                enemyHealthBar.setValue(enemyHealth2);
-                lblenemyhp.setText("Enemy: "+enemyHealth2);
-            }else if(stage == 3){
-                aqua.upstream(enemy);
-                enemyHealth3 = enemy.getHealthPoints();
-                enemyHealthBar.setValue(enemyHealth3);
-                lblenemyhp.setText("Enemy: "+enemyHealth3);
-            }
+            aqua.swiftEscape(enemy);
+            enemyHealth = enemy.getHealthPoints();
+            enemyHealthBar.setValue(enemyHealth);
+            lblenemyhp.setText("Enemy: "+enemyHealth);
             this.f=0;
         }
         
         if(g == 1){
-            if(stage == 1){
-                aqua.spinalTrap(enemy1);
-                enemyHealth1 = enemy1.getHealthPoints();
-                enemyHealthBar.setValue(enemyHealth1);
-                lblenemyhp.setText("Enemy: "+enemyHealth1);
-            }else if(stage == 2){
-                aqua.spinalTrap(enemy2);
-                enemyHealth2 = enemy2.getHealthPoints();
-                enemyHealthBar.setValue(enemyHealth2);
-                lblenemyhp.setText("Enemy: "+enemyHealth2);
-            }else if(stage == 3){
-                aqua.spinalTrap(enemy);
-                enemyHealth3 = enemy.getHealthPoints();
-                enemyHealthBar.setValue(enemyHealth3);
-                lblenemyhp.setText("Enemy: "+enemyHealth3);
-            }
+            aqua.upstream(enemy);
+            enemyHealth = enemy.getHealthPoints();
+            enemyHealthBar.setValue(enemyHealth);
+            lblenemyhp.setText("Enemy: "+enemyHealth);
             this.g=0;
         }
         
         if(h == 1){
-            if(stage == 1){
-                aqua.swiftEscape(enemy1);
-                enemyHealth1 = enemy1.getHealthPoints();
-                enemyHealthBar.setValue(enemyHealth1);
-                lblenemyhp.setText("Enemy: "+enemyHealth1);
-            }else if(stage == 2){
-                aqua.swiftEscape(enemy2);
-                enemyHealth2 = enemy2.getHealthPoints();
-                enemyHealthBar.setValue(enemyHealth2);
-                lblenemyhp.setText("Enemy: "+enemyHealth2);
-            }else if(stage == 3){
-                aqua.swiftEscape(enemy);
-                enemyHealth3 = enemy.getHealthPoints();
-                enemyHealthBar.setValue(enemyHealth3);
-                lblenemyhp.setText("Enemy: "+enemyHealth3);
-            }
+            aqua.spinalTrap(enemy);
+            enemyHealth = enemy.getHealthPoints();
+            enemyHealthBar.setValue(enemyHealth);
+            lblenemyhp.setText("Enemy: "+enemyHealth);
             this.h=0;
         }
         
         if(j == 1){
-            if(stage == 1){
-                beast.singleCombat(enemy1);
-                enemyHealth1 = enemy1.getHealthPoints();
-                enemyHealthBar.setValue(enemyHealth1);
-                lblenemyhp.setText("Enemy: "+enemyHealth1);
-            }else if(stage == 2){
-                beast.singleCombat(enemy2);
-                enemyHealth2 = enemy2.getHealthPoints();
-                enemyHealthBar.setValue(enemyHealth2);
-                lblenemyhp.setText("Enemy: "+enemyHealth2);
-            }else if(stage == 3){
-                beast.singleCombat(enemy);
-                enemyHealth3 = enemy.getHealthPoints();
-                enemyHealthBar.setValue(enemyHealth3);
-                lblenemyhp.setText("Enemy: "+enemyHealth3);
-            }
+            beast.ivory(enemy);
+            enemyHealth = enemy.getHealthPoints();
+            enemyHealthBar.setValue(enemyHealth);
+            lblenemyhp.setText("Enemy: "+enemyHealth);
             this.j=0;
         }
         
         if(k == 1){
-            if(stage == 1){
-                beast.nutCracker(enemy1);
-                enemyHealth1 = enemy1.getHealthPoints();
-                enemyHealthBar.setValue(enemyHealth1);
-                lblenemyhp.setText("Enemy: "+enemyHealth1);
-            }else if(stage == 2){
-                beast.nutCracker(enemy2);
-                enemyHealth2 = enemy2.getHealthPoints();
-                enemyHealthBar.setValue(enemyHealth2);
-                lblenemyhp.setText("Enemy: "+enemyHealth2);
-            }else if(stage == 3){
-                beast.nutCracker(enemy);
-                enemyHealth3 = enemy.getHealthPoints();
-                enemyHealthBar.setValue(enemyHealth3);
-                lblenemyhp.setText("Enemy: "+enemyHealth3);
-            }
+            beast.nutCracker(enemy);
+            enemyHealth = enemy.getHealthPoints();
+            enemyHealthBar.setValue(enemyHealth);
+            lblenemyhp.setText("Enemy: "+enemyHealth);
             this.k=0;
         }
         
         if(l == 1){
-            if(stage == 1){
-                beast.nutThrow(enemy1);
-                enemyHealth1 = enemy1.getHealthPoints();
-                enemyHealthBar.setValue(enemyHealth1);
-                lblenemyhp.setText("Enemy: "+enemyHealth1);
-            }else if(stage == 2){
-                beast.nutThrow(enemy2);
-                enemyHealth2 = enemy2.getHealthPoints();
-                enemyHealthBar.setValue(enemyHealth2);
-                lblenemyhp.setText("Enemy: "+enemyHealth2);
-            }else if(stage == 3){
-                beast.nutThrow(enemy);
-                enemyHealth3 = enemy.getHealthPoints();
-                enemyHealthBar.setValue(enemyHealth3);
-                lblenemyhp.setText("Enemy: "+enemyHealth3);
-            }
+            beast.nutThrow(enemy);
+            enemyHealth = enemy.getHealthPoints();
+            enemyHealthBar.setValue(enemyHealth);
+            lblenemyhp.setText("Enemy: "+enemyHealth);
             this.l=0;
         }
         
         if(m == 1){
-            if(stage == 1){
-                beast.ivory(enemy1);
-                enemyHealth1 = enemy1.getHealthPoints();
-                enemyHealthBar.setValue(enemyHealth1);
-                lblenemyhp.setText("Enemy: "+enemyHealth1);
-            }else if(stage == 2){
-                beast.ivory(enemy2);
-                enemyHealth2 = enemy2.getHealthPoints();
-                enemyHealthBar.setValue(enemyHealth2);
-                lblenemyhp.setText("Enemy: "+enemyHealth2);
-            }else if(stage == 3){
-                beast.ivory(enemy);
-                enemyHealth3 = enemy.getHealthPoints();
-                enemyHealthBar.setValue(enemyHealth3);
-                lblenemyhp.setText("Enemy: "+enemyHealth3);
-            }
+            beast.singleCombat(enemy);
+            enemyHealth = enemy.getHealthPoints();
+            enemyHealthBar.setValue(enemyHealth);
+            lblenemyhp.setText("Enemy: "+enemyHealth);
             this.m=0;
         }
     }
@@ -1575,9 +1304,8 @@ public class Adventure extends javax.swing.JFrame {
         lblbeastcard3.setVisible(false);
         lblbeastcard4.setVisible(false);
         
-        
-        enemyAttack();
         attack(a,b,c,d,e,f,g,h,j,k,l,m);
+        enemyAttack();
         
         
         removecrossout();
@@ -1594,46 +1322,18 @@ public class Adventure extends javax.swing.JFrame {
         }
         
         energyCounter.setText(energy+"/10");
-        if(stage == 1){
-            if(!enemy1.isAlive()){
-                slp+=50;
-                stage++;
-                lblenemy1.setVisible(false);
-                lbldead.setVisible(true);
-
-                new YouWin(name,slp,stage).setVisible(true);
-                if (musicClip != null && musicClip.isRunning()) {
-                    musicClip.stop(); // Pause the music
-                }
-                this.setVisible(false);
-            }
-        }else if(stage == 2){
-            if(!enemy2.isAlive()){
-                slp+=50;
-                stage++;
-                lblenemy2.setVisible(false);
-                lbldead.setVisible(true);
-
-                new YouWin(name,slp,stage).setVisible(true);
-
-                if (musicClip != null && musicClip.isRunning()) {
-                    musicClip.stop(); // Pause the music
-                }
-                this.setVisible(false);
-            }
-        }else if(stage == 3){
-            stage++;
+        
             if(!enemy.isAlive()){
                 lblenemy3.setVisible(false);
                 lbldead.setVisible(true);
-
+                slp+=50;
                 new YouWin(name,slp,stage).setVisible(true);
 
                 if (musicClip != null && musicClip.isRunning()) {
                     musicClip.stop(); // Pause the music
                 }
                 this.setVisible(false);
-            }
+            
         }
         
         aliveChecker();
@@ -1662,20 +1362,21 @@ public class Adventure extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Adventure.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Stage3.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Adventure.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Stage3.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Adventure.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Stage3.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Adventure.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Stage3.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Adventure().setVisible(true);
+                new Stage3().setVisible(true);
             }
         });
     }
@@ -1761,8 +1462,6 @@ public class Adventure extends javax.swing.JFrame {
     private javax.swing.JLabel lblbeastcard4;
     private javax.swing.JLabel lblbeasthp;
     private javax.swing.JLabel lbldead;
-    private javax.swing.JLabel lblenemy1;
-    private javax.swing.JLabel lblenemy2;
     private javax.swing.JLabel lblenemy3;
     private javax.swing.JLabel lblenemyhp;
     private javax.swing.JLabel lblreptile;

@@ -31,6 +31,7 @@ public class Dashboard extends javax.swing.JFrame {
     }
     
     String filepath = "C:\\Users\\Suenlie\\Downloads\\axiemusic.wav";
+    
     int stage;
     public Dashboard(String name, int slp, int stage){
         initComponents();
@@ -141,6 +142,9 @@ public class Dashboard extends javax.swing.JFrame {
         // TODO add your handling code here:
         String btnsound = "C:\\Users\\Suenlie\\Downloads\\Menu Game Button Click Sound Effect.wav";
         PlayMusic(btnsound);
+        if (musicClip != null && musicClip.isRunning()) {
+            musicClip.stop();
+        }
         new Wakbalos(name, slp,stage).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnArenaActionPerformed
@@ -149,6 +153,9 @@ public class Dashboard extends javax.swing.JFrame {
         // TODO add your handling code here:
         String btnsound = "C:\\Users\\Suenlie\\Downloads\\Menu Game Button Click Sound Effect.wav";
         PlayMusic(btnsound);
+        if (musicClip != null && musicClip.isRunning()) {
+            musicClip.stop();
+        }
         INVENTORY inventory = new INVENTORY(name,slp,stage);
         inventory.setVisible(true);
         this.setVisible(false);
@@ -157,6 +164,9 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void btnLeaderboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLeaderboardActionPerformed
         // TODO add your handling code here:
+        if (musicClip != null && musicClip.isRunning()) {
+            musicClip.stop();
+        }
         new Leaderboards(name,slp,stage).setVisible(true);
         this.setVisible(false);
         

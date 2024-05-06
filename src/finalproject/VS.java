@@ -114,8 +114,14 @@ public class VS extends javax.swing.JFrame {
 
     private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
         // TODO add your handling code here:
-        new Adventure(name,slp,stage).setVisible(true);
-        this.setVisible(false);
+        if(stage == 3){
+            new Stage3(name,slp,stage).setVisible(true);
+            this.setVisible(false);
+        }else{
+            new Adventure(name,slp,stage).setVisible(true);
+            this.setVisible(false);
+        }
+        
     }//GEN-LAST:event_btnStartActionPerformed
 
     /**

@@ -68,7 +68,7 @@ public class INVENTORY extends javax.swing.JFrame {
 
     private void returnbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnbtnActionPerformed
         // TODO add your handling code here:
-        Dashboard dash = new Dashboard(name,slp,stage,0);
+        Dashboard dash = new Dashboard(name,slp,stage);
         dash.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_returnbtnActionPerformed
